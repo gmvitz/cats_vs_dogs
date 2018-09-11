@@ -1,0 +1,25 @@
+---
+title: "Test RMD"
+author: "Gregory Vitz"
+date: "2018-09-10"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load the Data!
+
+```{r}
+library(dplyr)
+library(here)
+library(rio)
+
+cnd <- import(here("data", "cats_vs_dogs.csv"))
+```
+
+```{r}
+glimpse(cnd)
+```
+
