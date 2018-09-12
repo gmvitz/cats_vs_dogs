@@ -1,5 +1,5 @@
 ---
-title: "Test RMD"
+title: "Test Mapping"
 author: "Gregory Vitz"
 date: "2018-09-10"
 output: github_document
@@ -11,15 +11,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Load the Data!
 
-```{r}
+```{r message=FALSE}
+library(ggplot2)
 library(dplyr)
 library(here)
 library(rio)
 
-cnd <- import(here("data", "cats_vs_dogs.csv"))
+cnd <- import(here("data", "cats_vs_dogs.csv"), setclass = "tbl_df") %>% 
+  select(everything(), -V1)
 ```
 
 ```{r}
-glimpse(cnd)
+cnd
 ```
 
