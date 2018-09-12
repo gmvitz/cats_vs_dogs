@@ -7,6 +7,7 @@ Load the Data!
 
 ``` r
 library(ggplot2)
+library(stringr)
 library(dplyr)
 library(here)
 library(rio)
@@ -36,3 +37,29 @@ cnd
     ## #   avg_dogs_per_household <dbl>, dog_population <int>,
     ## #   percent_cat_owners <dbl>, n_cat_households <int>,
     ## #   avg_cats_per_household <dbl>, cat_population <int>
+
+Use geom\_map to put vales into state shapes
+
+``` r
+us <- map_data(map = "state")
+
+cnd$state <- str_to_lower(cnd$state)
+
+map_plot <- ggplot() +
+  geom_map(data = us, map = us,
+           aes(x = long, y = lat, map_id = region),
+           size = .15) +
+  geom_map(data = cnd, map = us,
+           aes(fill = percent_dog_owners, map_id = state),
+           size = .15) +
+  scale_fill_continuous() +
+  coord_map("albers", lat0 = 39, lat1 = 45)
+```
+
+    ## Warning: Ignoring unknown aesthetics: x, y
+
+``` r
+map_plot
+```
+
+![](analysis_files/figure-markdown_github/unnamed-chunk-3-1.png)
