@@ -48,7 +48,7 @@ map_plot <- ggplot() +
   theme(
     panel.grid = element_blank(),
     panel.grid.minor = element_blank()
-  )
+    )
 
 map_plot
 ```
