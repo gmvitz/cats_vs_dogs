@@ -46,19 +46,22 @@ us <- map_data(map = "state")
 cnd$state <- str_to_lower(cnd$state)
 
 map_plot <- ggplot() +
-  geom_map(data = us, map = us,
-           aes(x = long, y = lat, map_id = region),
-           size = .15) +
   geom_map(data = cnd, map = us,
            aes(fill = percent_dog_owners, map_id = state),
-           size = .15) +
+           size = .15, color = NA) +
+  expand_limits(x=us$long, y=us$lat) +
   scale_fill_continuous() +
-  coord_map("albers", lat0 = 39, lat1 = 45)
-```
+  coord_map("albers", lat0 = 39, lat1 = 45) +
+  labs(
+    title = "Percent of Dog Owners in Each State",
+    x = "",
+    y = ""
+    ) +
+  theme(
+    panel.grid = element_blank(),
+    panel.grid.minor = element_blank()
+  )
 
-    ## Warning: Ignoring unknown aesthetics: x, y
-
-``` r
 map_plot
 ```
 
